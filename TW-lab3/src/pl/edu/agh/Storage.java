@@ -11,7 +11,7 @@ public class Storage {
     private final Condition notFull = lock.newCondition();
     private final Condition notEmpty = lock.newCondition();
 
-    private int numberOfStorageElements = 0;
+    public int numberOfStorageElements = 0;
 
     public void put(int portion) throws InterruptedException {
         lock.lock();
@@ -20,7 +20,6 @@ public class Storage {
                 notFull.await();
             }
             numberOfStorageElements += portion;
-            Worker.incrementAccessMap(false, portion);
             notEmpty.signal();
         } finally {
             lock.unlock();
@@ -34,7 +33,6 @@ public class Storage {
                 notEmpty.await();
             }
             numberOfStorageElements -= portion;
-            Worker.incrementAccessMap(true, portion);
             notFull.signal();
         } finally {
             lock.unlock();
