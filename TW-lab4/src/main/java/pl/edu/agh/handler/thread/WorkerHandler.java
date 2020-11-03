@@ -16,10 +16,12 @@ public abstract class WorkerHandler {
     protected final PortionHandler portionHandler;
     protected final List<Worker> workers = new ArrayList<>();
     protected final Storage storage;
+    protected final int workerNumber;
 
-    public WorkerHandler(Storage storage, PortionHandler portionHandler) {
+    public WorkerHandler(Storage storage, PortionHandler portionHandler, int workerNumber) {
         this.storage = storage;
         this.portionHandler = portionHandler;
+        this.workerNumber = workerNumber;
     }
 
     public abstract void createAndRunWorkers();

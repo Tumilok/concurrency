@@ -5,15 +5,13 @@ import pl.edu.agh.handler.portion.PortionHandler;
 import pl.edu.agh.thread.Consumer;
 
 public class ConsumerHandler extends WorkerHandler {
-    private static final int CONSUMER_NUMBER = 8;
-
-    public ConsumerHandler(Storage storage, PortionHandler portionHandler) {
-        super(storage, portionHandler);
+    public ConsumerHandler(Storage storage, PortionHandler portionHandler, int workerNumber) {
+        super(storage, portionHandler, workerNumber);
     }
 
     @Override
     public void createAndRunWorkers() {
-        for (int i = 0; i < CONSUMER_NUMBER; i++) {
+        for (int i = 0; i < workerNumber; i++) {
             workers.add(new Consumer(storage, portionHandler.getPortion()));
             int finalI = i;
             new Thread(() -> workers.get(finalI).work()).start();
