@@ -23,10 +23,6 @@ public enum ConfigFileParser {
         this.key = key;
     }
 
-    public String getKey() {
-        return key;
-    }
-
     public String getValue() {
         try (InputStream input = new FileInputStream(CONFIG_FILE_PATH)) {
 
@@ -36,7 +32,7 @@ public enum ConfigFileParser {
             prop.load(input);
 
             // get the property value and print it out
-            return prop.getProperty(getKey());
+            return prop.getProperty(key);
 
         } catch (IOException ex) {
             ex.printStackTrace();
