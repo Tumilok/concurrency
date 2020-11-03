@@ -1,10 +1,12 @@
-package main.java.agh;
+package pl.edu.agh;
 
+import java.util.Objects;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Storage {
+    private final int buffSize = Integer.parseInt(Objects.requireNonNull(ConfigFileParser.BUFF_SIZE.getValue()));
     private final Lock lock = new ReentrantLock();
     private final Condition notFull = lock.newCondition();
     private final Condition notEmpty = lock.newCondition();
@@ -14,7 +16,8 @@ public class Storage {
     public void put(int portion) throws InterruptedException {
         lock.lock();
         try {
-            while (numberOfStorageElements + portion > Config.BUFF_SIZE) {
+
+            while (numberOfStorageElements + portion > buffSize) {
                 notFull.await();
             }
             numberOfStorageElements += portion;
