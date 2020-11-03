@@ -1,6 +1,6 @@
 package pl.edu.agh.handler.portion;
 
-import pl.edu.agh.ConfigFileParser;
+import pl.edu.agh.configuration.ConfigFileParser;
 
 import java.util.ArrayList;
 import java.util.List;

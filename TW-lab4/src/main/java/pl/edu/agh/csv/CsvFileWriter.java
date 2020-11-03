@@ -1,6 +1,6 @@
 package pl.edu.agh.csv;
 
-import pl.edu.agh.ConfigFileParser;
+import pl.edu.agh.configuration.ConfigFileParser;
 
 import java.io.*;
 import java.nio.file.Files;

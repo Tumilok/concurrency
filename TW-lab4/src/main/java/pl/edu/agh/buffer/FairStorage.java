@@ -1,6 +1,6 @@
 package pl.edu.agh.buffer;
 
-import pl.edu.agh.ConfigFileParser;
+import pl.edu.agh.configuration.ConfigFileParser;
 
 import java.util.Objects;
 import java.util.concurrent.locks.Condition;

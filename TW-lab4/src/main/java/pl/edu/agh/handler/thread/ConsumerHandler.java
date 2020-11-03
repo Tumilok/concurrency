@@ -1,6 +1,6 @@
 package pl.edu.agh.handler.thread;
 
-import pl.edu.agh.ConfigFileParser;
+import pl.edu.agh.configuration.ConfigFileParser;
 import pl.edu.agh.buffer.Storage;
 import pl.edu.agh.handler.portion.FairPortionHandler;
 import pl.edu.agh.handler.portion.PortionHandler;

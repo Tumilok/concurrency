@@ -1,11 +1,11 @@
 package pl.edu.agh.thread;
 
-import pl.edu.agh.AccessNumberCounter;
+import pl.edu.agh.AccessCounter;
 import pl.edu.agh.buffer.Storage;
 import pl.edu.agh.handler.portion.PortionHandler;
 
 public class Consumer extends Worker {
-    public Consumer(Storage storage, PortionHandler portionHandler, AccessNumberCounter counter) {
+    public Consumer(Storage storage, PortionHandler portionHandler, AccessCounter counter) {
         super(storage, portionHandler, counter);
     }
 

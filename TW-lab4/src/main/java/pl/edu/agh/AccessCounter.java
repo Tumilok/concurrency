@@ -1,5 +1,6 @@
 package pl.edu.agh;
 
+import pl.edu.agh.configuration.ConfigFileParser;
 import pl.edu.agh.csv.CsvData;
 import pl.edu.agh.csv.CsvFileWriter;
 
@@ -8,12 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AccessNumberCounter {
+public class AccessCounter {
     private final Map<Integer, Integer> portionsAccessNumber = new HashMap<>();
 
     private final String workersName;
 
-    public AccessNumberCounter(String workersName) {
+    public AccessCounter(String workersName) {
         this.workersName = workersName;
     }
 

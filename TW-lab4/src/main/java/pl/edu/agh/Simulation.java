@@ -3,6 +3,7 @@ package pl.edu.agh;
 import pl.edu.agh.buffer.FairStorage;
 import pl.edu.agh.buffer.Storage;
 import pl.edu.agh.buffer.UnfairStorage;
+import pl.edu.agh.configuration.ConfigFileParser;
 import pl.edu.agh.handler.thread.ConsumerHandler;
 import pl.edu.agh.handler.thread.ProducerHandler;
 import pl.edu.agh.handler.thread.WorkerHandler;
