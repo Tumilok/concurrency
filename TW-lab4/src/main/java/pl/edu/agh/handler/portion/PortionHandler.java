@@ -1,2 +1,5 @@
-package pl.edu.agh.handler.portion;public interface PortionHandler {
+package pl.edu.agh.handler.portion;
+
+public interface PortionHandler {
+    int getPortion();
 }
