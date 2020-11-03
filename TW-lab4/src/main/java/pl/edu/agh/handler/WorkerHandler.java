@@ -1,14 +1,15 @@
-package main.java.agh.handler;
+package pl.edu.agh.handler;
 
-import main.java.agh.Config;
-import main.java.agh.Storage;
-import main.java.agh.csv.CsvData;
-import main.java.agh.csv.CsvFileWriter;
-import main.java.agh.thread.Worker;
+import pl.edu.agh.ConfigFileParser;
+import pl.edu.agh.Storage;
+import pl.edu.agh.csv.CsvData;
+import pl.edu.agh.csv.CsvFileWriter;
+import pl.edu.agh.thread.Worker;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class WorkerHandler {
     protected final PortionHandler portionHandler = new PortionHandler();
@@ -26,12 +27,12 @@ public abstract class WorkerHandler {
         for (Worker worker : workers) {
             try {
                 fileWriter.writeDataToCSV(new CsvData(
-                        Config.BUFF_SIZE,
+                        Integer.parseInt(Objects.requireNonNull(ConfigFileParser.BUFF_SIZE.getValue())),
                         worker.getWorkerName(),
                         worker.getPortion(),
-                        Config.PC_RATIO,
-                        Config.IS_FAIR,
-                        Config.RANDOMIZATION,
+                        ConfigFileParser.PC_RATIO.getValue(),
+                        Boolean.parseBoolean(ConfigFileParser.IS_FAIR.getValue()),
+                        ConfigFileParser.RANDOMIZATION.getValue(),
                         worker.getAccessNumber()
                 ).toString());
             } catch (IOException e) {

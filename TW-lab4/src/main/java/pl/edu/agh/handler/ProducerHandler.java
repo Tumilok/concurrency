@@ -1,7 +1,7 @@
-package main.java.agh.handler;
+package pl.edu.agh.handler;
 
-import main.java.agh.Storage;
-import main.java.agh.thread.Producer;
+import pl.edu.agh.Storage;
+import pl.edu.agh.thread.Producer;
 
 public class ProducerHandler extends WorkerHandler {
     private static final int PRODUCER_NUMBER = 8;

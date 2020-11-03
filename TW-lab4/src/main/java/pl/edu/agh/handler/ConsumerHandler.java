@@ -1,7 +1,7 @@
-package main.java.agh.handler;
+package pl.edu.agh.handler;
 
-import main.java.agh.Storage;
-import main.java.agh.thread.Consumer;
+import pl.edu.agh.Storage;
+import pl.edu.agh.thread.Consumer;
 
 public class ConsumerHandler extends WorkerHandler {
     private static final int CONSUMER_NUMBER = 8;
