@@ -1,5 +1,7 @@
 package pl.edu.agh;
 
+import pl.edu.agh.buffer.FairStorage;
+import pl.edu.agh.buffer.Storage;
 import pl.edu.agh.buffer.UnfairStorage;
 import pl.edu.agh.csv.CsvData;
 import pl.edu.agh.csv.CsvFileWriter;
@@ -16,8 +18,15 @@ import java.util.Objects;
 
 public class Simulation {
 
-    private void run() throws InterruptedException, IOException {
-        UnfairStorage unfairStorage = new UnfairStorage();
+    public void run() throws InterruptedException, IOException {
+
+        boolean isFair = Boolean.parseBoolean(ConfigFileParser.IS_FAIR.getValue());
+        Storage storage;
+        if (isFair) {
+            storage = new FairStorage();
+        } else {
+            storage = new UnfairStorage();
+        }
 
         String randomization = ConfigFileParser.RANDOMIZATION.getValue();
         PortionHandler portionHandler;
@@ -39,8 +48,8 @@ public class Simulation {
             throw new IOException();
         }
 
-        WorkerHandler consumerHandler = new ConsumerHandler(unfairStorage, portionHandler, workerNumber);
-        WorkerHandler producerHandler = new ProducerHandler(unfairStorage, portionHandler, workerNumber);
+        WorkerHandler consumerHandler = new ConsumerHandler(storage, portionHandler, workerNumber);
+        WorkerHandler producerHandler = new ProducerHandler(storage, portionHandler, workerNumber);
 
         consumerHandler.createAndRunWorkers();
         producerHandler.createAndRunWorkers();
@@ -68,10 +77,5 @@ public class Simulation {
         }
 
 
-    }
-
-    public static void main(String[] args) throws InterruptedException, IOException {
-        new Simulation().run();
-//        new Main().testCsvWriter();
     }
 }
