@@ -15,11 +15,11 @@ import java.util.Objects;
 
 public class Simulation {
 
-    private void run() throws InterruptedException {
+    private void run() throws InterruptedException, IOException {
         Storage storage = new Storage();
 
         String randomization = ConfigFileParser.RANDOMIZATION.getValue();
-        PortionHandler portionHandler = null;
+        PortionHandler portionHandler;
         assert randomization != null;
         if (randomization.equals("fair")) {
             portionHandler = new FairPortionHandler();
@@ -27,14 +27,25 @@ public class Simulation {
             portionHandler = new UnfairPortionHandler();
         }
 
-        WorkerHandler consumerHandler = new ConsumerHandler(storage, portionHandler);
-        WorkerHandler producerHandler = new ProducerHandler(storage, portionHandler);
+        String pc_ratio = ConfigFileParser.PC_RATIO.getValue();
+        int workerNumber;
+        assert pc_ratio != null;
+        if (pc_ratio.equals("100P+100C")) {
+            workerNumber = 100;
+        } else if(pc_ratio.equals("1000P+1000C")) {
+            workerNumber = 1000;
+        } else {
+            throw new IOException();
+        }
+
+        WorkerHandler consumerHandler = new ConsumerHandler(storage, portionHandler, workerNumber);
+        WorkerHandler producerHandler = new ProducerHandler(storage, portionHandler, workerNumber);
 
         consumerHandler.createAndRunWorkers();
         producerHandler.createAndRunWorkers();
 
-        int time = Integer.parseInt(Objects.requireNonNull(ConfigFileParser.SIMULATION_DURATION.getValue()));
-        Thread.sleep(time);
+        int timeSec = Integer.parseInt(Objects.requireNonNull(ConfigFileParser.SIMULATION_DURATION.getValue()));
+        Thread.sleep(timeSec * 1000);
 
         Worker.finish();
 
@@ -58,7 +69,7 @@ public class Simulation {
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         new Simulation().run();
 //        new Main().testCsvWriter();
     }
