@@ -1,4 +1,4 @@
-package main.java.agh.csv;
+package pl.edu.agh.csv;
 
 public class CsvData {
 
