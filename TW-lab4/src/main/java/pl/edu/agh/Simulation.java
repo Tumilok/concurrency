@@ -2,7 +2,6 @@ package pl.edu.agh;
 
 import pl.edu.agh.csv.CsvData;
 import pl.edu.agh.csv.CsvFileWriter;
-import pl.edu.agh.handler.ConfigFileParser;
 import pl.edu.agh.handler.ConsumerHandler;
 import pl.edu.agh.handler.ProducerHandler;
 import pl.edu.agh.handler.WorkerHandler;
@@ -11,7 +10,7 @@ import pl.edu.agh.thread.Worker;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Main {
+public class Simulation {
 
     private void run() throws InterruptedException {
         Storage storage = new Storage();
@@ -48,7 +47,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new Main().run();
+        new Simulation().run();
 //        new Main().testCsvWriter();
     }
 }
