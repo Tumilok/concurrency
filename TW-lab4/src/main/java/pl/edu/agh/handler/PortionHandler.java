@@ -1,4 +1,4 @@
-package main.java.agh.handler;
+package pl.edu.agh.handler;
 
 import java.util.ArrayList;
 import java.util.List;
