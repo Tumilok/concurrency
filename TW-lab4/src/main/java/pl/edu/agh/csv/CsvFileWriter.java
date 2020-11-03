@@ -33,10 +33,12 @@ public class CsvFileWriter {
         }
     }
 
-    public void writeDataToCSV(String line) throws IOException {
+    public void writeDataToCSV(String line) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvOutputFile, true))) {
             bw.append(line);
             bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
