@@ -1,4 +1,6 @@
-package pl.edu.agh.csv;
+package main.java.agh.csv;
+
+import main.java.agh.Config;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,6 +17,12 @@ public class CsvFileWriter {
     private final File csvOutputFile = new File(CSV_FILE_NAME);
 
     private CsvFileWriter() {
+        if (Config.CREATE_NEW_OUTPUT_FILE) {
+            createNewCsvFile();
+        }
+    }
+
+    private void createNewCsvFile() {
         try {
             Files.deleteIfExists(csvOutputFile.toPath());
             writeDataToCSV(CsvData.TITLES);

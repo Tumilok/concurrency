@@ -1,13 +1,15 @@
 package pl.edu.agh;
 
-import pl.edu.agh.csv.CsvFileWriter;
 import pl.edu.agh.csv.CsvData;
+import pl.edu.agh.csv.CsvFileWriter;
+import pl.edu.agh.handler.ConfigFileParser;
 import pl.edu.agh.handler.ConsumerHandler;
 import pl.edu.agh.handler.ProducerHandler;
 import pl.edu.agh.handler.WorkerHandler;
 import pl.edu.agh.thread.Worker;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main {
 
@@ -20,12 +22,13 @@ public class Main {
         consumerHandler.createAndRunWorkers();
         producerHandler.createAndRunWorkers();
 
-        Thread.sleep(10000);
+        int time = Integer.parseInt(Objects.requireNonNull(ConfigFileParser.SIMULATION_DURATION.getValue()));
+        Thread.sleep(time);
 
         Worker.finish();
 
-        consumerHandler.printHistogram();
-        producerHandler.printHistogram();
+        consumerHandler.writeResults();
+        producerHandler.writeResults();
 
         System.exit(0);
     }
@@ -45,7 +48,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
-//        new Main().run();
-        new Main().testCsvWriter();
+        new Main().run();
+//        new Main().testCsvWriter();
     }
 }

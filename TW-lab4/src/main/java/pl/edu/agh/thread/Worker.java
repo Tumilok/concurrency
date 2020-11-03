@@ -1,27 +1,29 @@
-package pl.edu.agh.thread;
+package main.java.agh.thread;
 
-import pl.edu.agh.Storage;
+import main.java.agh.Storage;
 
 public abstract class Worker {
     protected static boolean isFinished = false;
 
+    protected final String workerName;
     protected final Storage storage;
     protected final int portion;
     protected int accessNumber = 0;
 
     public Worker(Storage storage, int portion) {
+        workerName = this instanceof Consumer ? "Consumer" : "Producer";
         this.storage = storage;
         this.portion = portion;
     }
 
     public abstract void work();
 
-    public void printAccessNumber(int min) {
-        System.out.print(portion + ": ");
-        for (int i = 0; i < accessNumber / min; i++) {
-            System.out.print('*');
-        }
-        System.out.println(" " + accessNumber);
+    public String getWorkerName() {
+        return workerName;
+    }
+
+    public int getPortion() {
+        return portion;
     }
 
     public int getAccessNumber() {

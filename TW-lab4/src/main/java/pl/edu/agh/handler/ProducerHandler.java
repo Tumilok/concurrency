@@ -1,7 +1,7 @@
-package pl.edu.agh.handler;
+package main.java.agh.handler;
 
-import pl.edu.agh.Storage;
-import pl.edu.agh.thread.Producer;
+import main.java.agh.Storage;
+import main.java.agh.thread.Producer;
 
 public class ProducerHandler extends WorkerHandler {
     private static final int PRODUCER_NUMBER = 8;
@@ -17,11 +17,5 @@ public class ProducerHandler extends WorkerHandler {
             int finalI = i;
             new Thread(() -> workers.get(finalI).work()).start();
         }
-    }
-
-    @Override
-    public void printHistogram() {
-        System.out.println("Producers");
-        super.printHistogram();
     }
 }

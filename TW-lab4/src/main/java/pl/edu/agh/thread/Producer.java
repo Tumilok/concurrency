@@ -1,9 +1,11 @@
-package pl.edu.agh.thread;
+package main.java.agh.thread;
 
-import pl.edu.agh.Storage;
+import main.java.agh.Storage;
 
-public class Consumer extends Worker {
-    public Consumer(Storage storage, int portion) {
+public class Producer extends Worker {
+    public static final String WORKER_NAME = "Producer";
+
+    public Producer(Storage storage, int portion) {
         super(storage, portion);
     }
 
@@ -11,7 +13,7 @@ public class Consumer extends Worker {
     public void work() {
         while (!isFinished) {
             try {
-                storage.take(portion);
+                storage.put(portion);
                 ++accessNumber;
             } catch (InterruptedException e) {
                 e.printStackTrace();
