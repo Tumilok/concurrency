@@ -1,6 +1,6 @@
-package main.java.agh.thread;
+package pl.edu.agh.thread;
 
-import main.java.agh.Storage;
+import pl.edu.agh.Storage;
 
 public class Consumer extends Worker {
     public static final String CONSUMER_NAME = "CONSUMER";
