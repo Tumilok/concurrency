@@ -1,19 +1,19 @@
 package pl.edu.agh.thread;
 
-import pl.edu.agh.Storage;
+import pl.edu.agh.buffer.UnfairStorage;
 
 public class Consumer extends Worker {
     public static final String CONSUMER_NAME = "CONSUMER";
 
-    public Consumer(Storage storage, int portion) {
-        super(storage, portion);
+    public Consumer(UnfairStorage unfairStorage, int portion) {
+        super(unfairStorage, portion);
     }
 
     @Override
     public void work() {
         while (!isFinished) {
             try {
-                storage.take(portion);
+                unfairStorage.take(portion);
                 ++accessNumber;
             } catch (InterruptedException e) {
                 e.printStackTrace();
