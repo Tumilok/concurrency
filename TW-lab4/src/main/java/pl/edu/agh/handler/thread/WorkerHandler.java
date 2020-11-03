@@ -1,7 +1,7 @@
 package pl.edu.agh.handler.thread;
 
 import pl.edu.agh.ConfigFileParser;
-import pl.edu.agh.buffer.UnfairStorage;
+import pl.edu.agh.buffer.Storage;
 import pl.edu.agh.csv.CsvData;
 import pl.edu.agh.csv.CsvFileWriter;
 import pl.edu.agh.handler.portion.PortionHandler;
@@ -15,11 +15,11 @@ import java.util.Objects;
 public abstract class WorkerHandler {
     protected final PortionHandler portionHandler;
     protected final List<Worker> workers = new ArrayList<>();
-    protected final UnfairStorage unfairStorage;
+    protected final Storage storage;
     protected final int workerNumber;
 
-    public WorkerHandler(UnfairStorage unfairStorage, PortionHandler portionHandler, int workerNumber) {
-        this.unfairStorage = unfairStorage;
+    public WorkerHandler(Storage storage, PortionHandler portionHandler, int workerNumber) {
+        this.storage = storage;
         this.portionHandler = portionHandler;
         this.workerNumber = workerNumber;
     }

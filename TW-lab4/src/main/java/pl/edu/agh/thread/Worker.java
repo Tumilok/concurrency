@@ -1,18 +1,18 @@
 package pl.edu.agh.thread;
 
-import pl.edu.agh.buffer.UnfairStorage;
+import pl.edu.agh.buffer.Storage;
 
 public abstract class Worker {
     protected static boolean isFinished = false;
 
     protected final String workerName;
-    protected final UnfairStorage unfairStorage;
+    protected final Storage storage;
     protected final int portion;
     protected int accessNumber = 0;
 
-    public Worker(UnfairStorage unfairStorage, int portion) {
+    public Worker(Storage storage, int portion) {
         workerName = this instanceof Consumer ? "Consumer" : "Producer";
-        this.unfairStorage = unfairStorage;
+        this.storage = storage;
         this.portion = portion;
     }
 
