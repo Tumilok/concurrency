@@ -1,13 +1,16 @@
 package pl.edu.agh.csv;
 
-import pl.edu.agh.configuration.ConfigFileParser;
+import pl.edu.agh.configuration.PropertyReader;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 
 public class CsvFileWriter {
-    private static final String CSV_FILEPATH = ConfigFileParser.OUTPUT_FILEPATH.getValue();
-    private static final String CSV_FILENAME = ConfigFileParser.OUTPUT_FILENAME.getValue();
+    private static final String CSV_FILEPATH = PropertyReader.getInstance().getFilePath();
+    private static final String CSV_FILENAME = PropertyReader.getInstance().getFileName();
 
     private static final CsvFileWriter instance = new CsvFileWriter();
 
@@ -18,8 +21,7 @@ public class CsvFileWriter {
     private final File csvOutputFile = new File(CSV_FILEPATH + CSV_FILENAME);
 
     private CsvFileWriter() {
-        String value = ConfigFileParser.NEW_OUTPUT_FILE.getValue();
-        if (Boolean.parseBoolean(value)) {
+        if (PropertyReader.getInstance().isNewOutputFile()) {
             createNewCsvFile();
         }
     }

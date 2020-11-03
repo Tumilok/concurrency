@@ -22,4 +22,8 @@ public abstract class Worker {
     public static void finish() {
         isFinished = true;
     }
+
+    public static void start() {
+        isFinished = false;
+    }
 }

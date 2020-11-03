@@ -1,14 +1,13 @@
 package pl.edu.agh.buffer;
 
-import pl.edu.agh.configuration.ConfigFileParser;
+import pl.edu.agh.configuration.PropertyReader;
 
-import java.util.Objects;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class UnfairStorage implements Storage {
-    private final int buffSize = Integer.parseInt(Objects.requireNonNull(ConfigFileParser.BUFF_SIZE.getValue()));
+    private final int buffSize = PropertyReader.getInstance().getBuffSize();
 
     private final Lock lock = new ReentrantLock();
 

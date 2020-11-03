@@ -1,10 +1,7 @@
 package pl.edu.agh.handler.thread;
 
-import pl.edu.agh.configuration.ConfigFileParser;
 import pl.edu.agh.buffer.Storage;
-import pl.edu.agh.handler.portion.FairPortionHandler;
 import pl.edu.agh.handler.portion.PortionHandler;
-import pl.edu.agh.handler.portion.UnfairPortionHandler;
 import pl.edu.agh.thread.Consumer;
 
 public class ConsumerHandler extends WorkerHandler {
@@ -14,14 +11,7 @@ public class ConsumerHandler extends WorkerHandler {
 
     @Override
     public void createAndRunWorkers() {
-        String randomization = ConfigFileParser.RANDOMIZATION.getValue();
-        PortionHandler portionHandler;
-        assert randomization != null;
-        if (randomization.equals("fair")) {
-            portionHandler = new FairPortionHandler();
-        } else {
-            portionHandler = new UnfairPortionHandler();
-        }
+        PortionHandler portionHandler = getPortionHandlerInstance();
         for (int i = 0; i < workerNumber; i++) {
             workers.add(new Consumer(storage, portionHandler, counter));
             int finalI = i;

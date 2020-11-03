@@ -2,6 +2,10 @@ package pl.edu.agh.handler.thread;
 
 import pl.edu.agh.AccessCounter;
 import pl.edu.agh.buffer.Storage;
+import pl.edu.agh.configuration.PropertyReader;
+import pl.edu.agh.handler.portion.FairPortionHandler;
+import pl.edu.agh.handler.portion.PortionHandler;
+import pl.edu.agh.handler.portion.UnfairPortionHandler;
 import pl.edu.agh.thread.Worker;
 
 import java.util.ArrayList;
@@ -27,5 +31,19 @@ public abstract class WorkerHandler {
 
     public void writeResults() {
         counter.writeResults();
+    }
+
+    protected PortionHandler getPortionHandlerInstance() {
+        String randomization = PropertyReader.getInstance().getRandomization();
+        assert randomization != null;
+        return randomization.equals("fair") ? new FairPortionHandler() : new UnfairPortionHandler();
+    }
+
+    public static WorkerHandler getConsumerHandlerInstance(Storage storage) {
+        return new ConsumerHandler(storage, PropertyReader.getInstance().getPC_Ratio());
+    }
+
+    public static WorkerHandler getProducerHandlerInstance(Storage storage) {
+        return new ProducerHandler(storage, PropertyReader.getInstance().getPC_Ratio());
     }
 }

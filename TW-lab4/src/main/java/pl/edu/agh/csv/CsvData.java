@@ -7,12 +7,12 @@ public class CsvData {
     private final int bufferSize;
     private final String workerName;
     private final int portionSize;
-    private final String PC_Ratio;
+    private final int PC_Ratio;
     private final boolean isFair;
     private final String randomization;
     private final int bufferAccessNumber;
 
-    public CsvData(int bufferSize, String workerName, int portionSize, String PC_Ratio, boolean isFair, String randomization, int bufferAccessNumber) {
+    public CsvData(int bufferSize, String workerName, int portionSize, int PC_Ratio, boolean isFair, String randomization, int bufferAccessNumber) {
         this.bufferSize = bufferSize;
         this.workerName = workerName;
         this.portionSize = portionSize;
@@ -45,7 +45,7 @@ public class CsvData {
         return portionSize;
     }
 
-    public String getPC_Ratio() {
+    public int getPC_Ratio() {
         return PC_Ratio;
     }
 
