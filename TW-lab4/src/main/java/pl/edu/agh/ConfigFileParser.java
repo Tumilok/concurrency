@@ -1,4 +1,4 @@
-package pl.edu.agh.handler;
+package pl.edu.agh;
 
 import java.io.FileInputStream;
 import java.io.IOException;
