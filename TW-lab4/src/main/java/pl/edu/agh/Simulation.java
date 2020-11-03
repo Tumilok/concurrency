@@ -2,9 +2,12 @@ package pl.edu.agh;
 
 import pl.edu.agh.csv.CsvData;
 import pl.edu.agh.csv.CsvFileWriter;
-import pl.edu.agh.handler.ConsumerHandler;
-import pl.edu.agh.handler.ProducerHandler;
-import pl.edu.agh.handler.WorkerHandler;
+import pl.edu.agh.handler.portion.FairPortionHandler;
+import pl.edu.agh.handler.portion.PortionHandler;
+import pl.edu.agh.handler.portion.UnfairPortionHandler;
+import pl.edu.agh.handler.thread.ConsumerHandler;
+import pl.edu.agh.handler.thread.ProducerHandler;
+import pl.edu.agh.handler.thread.WorkerHandler;
 import pl.edu.agh.thread.Worker;
 
 import java.io.IOException;
@@ -15,8 +18,17 @@ public class Simulation {
     private void run() throws InterruptedException {
         Storage storage = new Storage();
 
-        WorkerHandler consumerHandler = new ConsumerHandler(storage);
-        WorkerHandler producerHandler = new ProducerHandler(storage);
+        String randomization = ConfigFileParser.RANDOMIZATION.getValue();
+        PortionHandler portionHandler = null;
+        assert randomization != null;
+        if (randomization.equals("fair")) {
+            portionHandler = new FairPortionHandler();
+        } else {
+            portionHandler = new UnfairPortionHandler();
+        }
+
+        WorkerHandler consumerHandler = new ConsumerHandler(storage, portionHandler);
+        WorkerHandler producerHandler = new ProducerHandler(storage, portionHandler);
 
         consumerHandler.createAndRunWorkers();
         producerHandler.createAndRunWorkers();
