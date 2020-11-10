@@ -12,10 +12,15 @@ import java.util.concurrent.Executors;
 public class Main {
     private final Mandelbrot mandelbrot;
     private final CsvFileWriter writer = CsvFileWriter.getInstance();
-    private final List<Integer> threadNumList = List.of(1, 2, 5, 10, 25, 50, 100);
+    private final List<Integer> threadNumList = new ArrayList<>();
 
     public Main(Mandelbrot mandelbrot) {
         this.mandelbrot = mandelbrot;
+        threadNumList.add(1);
+        threadNumList.add(3);
+        for (int i = 5; i <= 100; i+=5) {
+            threadNumList.add(i);
+        }
     }
 
     public void run() {
@@ -24,7 +29,7 @@ public class Main {
 
             long startTimeMillis = System.currentTimeMillis();
 
-            for (int j = 0; j < 100; j++) {
+            for (int j = 0; j < 500; j++) {
                 ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
                 List<Runnable> tasks = new ArrayList<>();
                 for (int i = 0; i < numberOfTasks; i++) {
