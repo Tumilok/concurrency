@@ -1,4 +1,4 @@
-package pl.edu.agh.tw.task1;
+package pl.edu.agh.tw;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,14 +7,14 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Table {
+public class StarvationTable implements Table {
 
     private final Lock lock = new ReentrantLock();
     private final int numberOfForks;
     private final List<Integer> freeForks;
     private final List<Condition> philosophers;
 
-    public Table(int numberOfForks) {
+    public StarvationTable(int numberOfForks) {
         this.numberOfForks = numberOfForks;
         this.freeForks = new ArrayList<>(Collections.nCopies(numberOfForks, 2));
         this.philosophers = new ArrayList<>();

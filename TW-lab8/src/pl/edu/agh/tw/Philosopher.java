@@ -1,4 +1,4 @@
-package pl.edu.agh.tw.task1;
+package pl.edu.agh.tw;
 
 public class Philosopher implements Runnable {
 

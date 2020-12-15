@@ -1,4 +1,4 @@
-package pl.edu.agh.tw.task1;
+package pl.edu.agh.tw;
 
 import java.util.HashMap;
 import java.util.Map;
